@@ -3,14 +3,12 @@ package hospital.emergency.EmergencyRoom;
 import hospital.emergency.patient.Patient;
 //تخت
 public class Bed {
-    private int id;
-    private boolean isEmpty;
-    private String location;
-    private Patient assignedPatient;
+    public int id;
+    public boolean isEmpty;
+    public Patient assignedPatient;
 
-    public Bed(int id, String location) {
+    public Bed(int id) {
         this.id = id;
-        this.location = location;
         this.isEmpty = true;
     }
     //اختصاص تخت به بیمار
@@ -34,5 +32,4 @@ public class Bed {
     public boolean isEmpty() { return isEmpty; }
     public int getId() { return this.id; }
     public Patient getAssignedPatient() { return assignedPatient; }
-    public String getLocation() { return this.location; }
 }

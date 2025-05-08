@@ -9,7 +9,7 @@ public class Patient {
     private Status status;
     private MedicalRecord mRecord;
 
-    public Patient(int id, String name, int age, SeverityLevel severityLevel) {
+    public Patient(int id, String name, int age, SeverityLevel severityLevel , boolean needBed) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -18,9 +18,11 @@ public class Patient {
         this.mRecord = new MedicalRecord(id);
     }
 
-    public void printinfo() {
-        System.out.println("patient: " + name + ", age: " + age + ", severity: " + severityLevel);
-        mRecord.viewRecords();
+    public String getinfo() {
+        String text = "";
+        text += ("patient: " + name + ", age: " + age + ", severity: " + severityLevel + "\n");
+        text += mRecord.viewRecords();
+        return text;
     }
 
     public void updateStatus(Status newStatus) {

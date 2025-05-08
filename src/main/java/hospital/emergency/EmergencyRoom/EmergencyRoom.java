@@ -1,26 +1,23 @@
 package hospital.emergency.EmergencyRoom;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
-import hospital.emergency.patient.Patient;
-import hospital.emergency.patient.SeverityLevel;
-import hospital.emergency.patient.Status;
-import hospital.emergency.staff.Staff;
-
+import hospital.emergency.patient.*;
+import hospital.emergency.staff.*;
+import java.util.ArrayList;
 //شبیه سازی محیط اورژانس
 public class EmergencyRoom {
-    private List<Bed> beds;
-    private PatientsQueue queue;
-    private List<Staff> staffs;
-    private List<Patient> patients;
+    public BedsManage bedsMg; // مدیریت تخت ها
+    public PatientsQueue queue; //   لیست بیماران در صف
+    public List<Staff> staffs; //            لیست پرسنل
+    public List<Patient> patients; //  لیست همه بیماران
 
-    public EmergencyRoom(int totalBeds) {
-        for (int i = 1; i <= totalBeds; i++) {
-            beds.add(new Bed(i, "ER-" + i));
-        }
+    public EmergencyRoom(int bedsCount) {
+        bedsMg = new BedsManage(bedsCount);
+        queue = new PatientsQueue();
+        staffs = new ArrayList<>();
+        patients = new ArrayList<>();
+
     }
 
     // ثبت بیمار
@@ -30,11 +27,16 @@ public class EmergencyRoom {
         manageQueue();
     }
 
-    //مدیریت صف انتظار
+    //اختصاص تخت خالی به بیماران در صف
     public void manageQueue() {
-        for(Bed b:beds){
-            if (b.isEmpty()) {
-                Patient p = queue.peek();
+        Bed b = bedsMg.getEmptyBed();
+        
+        // اگر تخت خالی وجود داشت
+        if  (b != null) {
+            Patient p = queue.peek();
+            
+            //اگر صف خالی نبود
+            if (p != null){
                 b.assignToPatient(p);
                 p.updateStatus(Status.ADMITTED);
                 queue.poll();
@@ -48,16 +50,9 @@ public class EmergencyRoom {
         Patient p = findPatient(patientId);
         if (p == null)
             return false;
-        
-        patients.remove(p);
-
-        for(Bed b : beds){
-            if (b.getId() == patientId) {
-                b.release();
-                break;
-            }
-        }
-
+        p.updateStatus(Status.DISCHARGED);
+        bedsMg.releaseBed(p);
+        manageQueue();
         return true;
     }
 
@@ -70,21 +65,6 @@ public class EmergencyRoom {
             }
         }
         return null ;
-    }
-
-    //جست و جوی بیمار بر اساس شدت بیماری
-    public Patient findPatient(SeverityLevel s) {
-        for(Patient p : patients){
-            if (p.getSeverityLevel() == s) {
-                return p;
-            }
-        }
-        return null ;
-    }
-
-    //افزودن پرسنل
-    public boolean addStaff(Staff staff){
-        return staffs.add(staff);
     }
 }
 

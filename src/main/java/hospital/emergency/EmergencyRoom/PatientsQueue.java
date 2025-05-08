@@ -1,14 +1,14 @@
 package hospital.emergency.EmergencyRoom;
 
-import java.util.Queue;
 import hospital.emergency.patient.Patient;
+import java.util.LinkedList;
 
 // ایجاد صف بیماران بر اساس الویت
 public class PatientsQueue {
-    Queue<Patient> queueCritical;
-    Queue<Patient> queueHigh;
-    Queue<Patient> queueMEDIUM;
-    Queue<Patient> queueLow;
+    private LinkedList<Patient> queueCritical;
+    private LinkedList<Patient> queueHigh;
+    private LinkedList<Patient> queueMEDIUM;
+    private LinkedList<Patient> queueLow;
 
     public void add(Patient p) {
         switch (p.getSeverityLevel()) {
@@ -50,4 +50,5 @@ public class PatientsQueue {
             return queueLow.poll();
         }
     }
+    
 }

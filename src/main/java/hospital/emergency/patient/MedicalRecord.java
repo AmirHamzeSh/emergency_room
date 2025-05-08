@@ -12,19 +12,19 @@ public class MedicalRecord {
         this.entries = new ArrayList<>();
     }
 
-    public void addEntry(String entry) {
-        entries.add(entry);
-        System.out.println("Added medical entry for " + patientId + ": " + entry);
+    public boolean addEntry(String entry) {
+        return entries.add(entry);
     }
 
-    public void viewRecords() {
-
+    public String viewRecords() {
+        String text = "";
         if (!entries.isEmpty()) {
-            System.out.println("Medical records for patientId " + patientId + ":");
+            text += ("Medical records for patientId " + patientId + ":");
             for (String e : entries) {
-                System.out.println(" - " + e);
+                text += (" - " + e + "\n");
             }
         }
+        return text;
 
     }
 

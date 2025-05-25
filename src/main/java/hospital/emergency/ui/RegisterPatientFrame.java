@@ -6,6 +6,7 @@ package hospital.emergency.ui;
 
 import hospital.emergency.EmergencyRoom.EmergencyRoom;
 import hospital.emergency.patient.Patient;
+import hospital.emergency.patient.SeverityLevel;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,28 +32,32 @@ public class RegisterPatientFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btn_register = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         tf_name = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        tf_id = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cb_gen = new javax.swing.JComboBox<>();
         tf_age = new javax.swing.JTextField();
         ckb_needbed = new javax.swing.JCheckBox();
+        tf_Family = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        rbSeverityL = new javax.swing.JRadioButton();
+        rbServrityM = new javax.swing.JRadioButton();
+        rbSeverityH = new javax.swing.JRadioButton();
+        rbSeverityC = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ثبت بیمار جدید");
-        setSize(new java.awt.Dimension(500, 320));
+        setSize(new java.awt.Dimension(480, 350));
 
         jLabel1.setText("مشخصات بیمار");
 
-        jLabel2.setText("نام:");
+        jLabel2.setText("نام :");
 
         btn_register.setText("ثبت");
         btn_register.addActionListener(new java.awt.event.ActionListener() {
@@ -68,8 +73,6 @@ public class RegisterPatientFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("ID");
-
         jLabel4.setText("جنسیت:");
 
         jLabel5.setText("سن:");
@@ -78,73 +81,115 @@ public class RegisterPatientFrame extends javax.swing.JFrame {
 
         ckb_needbed.setText("نیاز به تخت؟");
 
+        jLabel6.setText("نام خانوادگی");
+
+        jLabel3.setText("شدت وضعیت:");
+
+        rbSeverityL.setText("کم");
+        rbSeverityL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSeverityLActionPerformed(evt);
+            }
+        });
+
+        rbServrityM.setText("متوسط");
+        rbServrityM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbServrityMActionPerformed(evt);
+            }
+        });
+
+        rbSeverityH.setText("زیاد");
+        rbSeverityH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSeverityHActionPerformed(evt);
+            }
+        });
+
+        rbSeverityC.setText("حاد");
+        rbSeverityC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSeverityCActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_register)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(ckb_needbed)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ckb_needbed)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(tf_id, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                                    .addComponent(tf_name, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                                    .addComponent(cb_gen, 0, 297, Short.MAX_VALUE)
-                                    .addComponent(tf_age, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(39, 39, 39)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel4)))))
-                            .addComponent(jLabel1))
-                        .addGap(46, 46, 46))))
+                                .addComponent(btn_register)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_name)
+                            .addComponent(tf_Family)
+                            .addComponent(cb_gen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tf_age)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(100, Short.MAX_VALUE)
+                        .addComponent(rbSeverityC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbSeverityH)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbServrityM)
+                        .addGap(12, 12, 12)
+                        .addComponent(rbSeverityL)
+                        .addGap(34, 34, 34)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_Family, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_gen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(rbSeverityL)
+                    .addComponent(rbServrityM)
+                    .addComponent(rbSeverityH)
+                    .addComponent(rbSeverityC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ckb_needbed)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_register)
                     .addComponent(jButton2))
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,10 +197,10 @@ public class RegisterPatientFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    SeverityLevel severityLevel ;
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
         // TODO add your handling code here:
-            if(tf_age.getText().isEmpty() || tf_id.getText().isEmpty() || tf_name.getText().isEmpty()) {
+            if(tf_age.getText().isEmpty() || tf_Family.getText().isEmpty() || tf_name.getText().isEmpty() || severityLevel == null) {
         JOptionPane.showMessageDialog(
             this,
             "همه موارد را کامل کنید.",
@@ -164,13 +209,13 @@ public class RegisterPatientFrame extends javax.swing.JFrame {
         );
     } else {
         try {
-            int id = Integer.parseInt(tf_id.getText().trim());
             String name = tf_name.getText();
+            String family = tf_Family.getText();
             int age = Integer.parseInt(tf_age.getText().trim());
             String gender = cb_gen.getSelectedItem().toString();
             boolean needBed = ckb_needbed.isSelected();
 
-            Patient patient = new Patient(id, name, age, gender, needBed);
+            Patient patient = new Patient(name, family, age, gender,severityLevel, needBed);
             room.registerPatient(patient);
 
             JOptionPane.showMessageDialog(
@@ -181,8 +226,8 @@ public class RegisterPatientFrame extends javax.swing.JFrame {
             );
 
             // اگر میخوای فرم رو بعد ثبت پاک کنی:
-            tf_id.setText("");
             tf_name.setText("");
+            tf_Family.setText("");
             tf_age.setText("");
             ckb_needbed.setSelected(false);
             cb_gen.setSelectedIndex(0);
@@ -197,6 +242,39 @@ public class RegisterPatientFrame extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_btn_registerActionPerformed
+
+    private void rbSeverityLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSeverityLActionPerformed
+        // TODO add your handling code here:
+        rbServrityM.setSelected(false);
+        rbSeverityH.setSelected(false);
+        rbSeverityC.setSelected(false);
+        severityLevel =  SeverityLevel.LOW;
+
+    }//GEN-LAST:event_rbSeverityLActionPerformed
+
+    private void rbServrityMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbServrityMActionPerformed
+        // TODO add your handling code here:
+        rbSeverityL.setSelected(false);
+        rbSeverityH.setSelected(false);
+        rbSeverityC.setSelected(false);
+        severityLevel =  SeverityLevel.MEDIUM;
+    }//GEN-LAST:event_rbServrityMActionPerformed
+
+    private void rbSeverityHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSeverityHActionPerformed
+        // TODO add your handling code here:
+        rbServrityM.setSelected(false);
+        rbSeverityL.setSelected(false);
+        rbSeverityC.setSelected(false);
+        severityLevel =  SeverityLevel.HIGH;
+    }//GEN-LAST:event_rbSeverityHActionPerformed
+
+    private void rbSeverityCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSeverityCActionPerformed
+        // TODO add your handling code here:
+        rbSeverityL.setSelected(false);
+        rbSeverityH.setSelected(false);
+        rbServrityM.setSelected(false);
+        severityLevel =  SeverityLevel.CRITICAL;
+    }//GEN-LAST:event_rbSeverityCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,8 +314,13 @@ public class RegisterPatientFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton rbServrityM;
+    private javax.swing.JRadioButton rbSeverityC;
+    private javax.swing.JRadioButton rbSeverityH;
+    private javax.swing.JRadioButton rbSeverityL;
+    private javax.swing.JTextField tf_Family;
     private javax.swing.JTextField tf_age;
-    private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_name;
     // End of variables declaration//GEN-END:variables
 }

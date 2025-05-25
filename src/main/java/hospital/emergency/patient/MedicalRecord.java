@@ -4,29 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 //پرونده پزشکی       دستورات درمانی
 public class MedicalRecord {
-    private int patientId;
-    private List<String> entries;
+    private int Id;
+    private String value = "";
 
     public MedicalRecord(int patientId) {
-        this.patientId = patientId;
-        this.entries = new ArrayList<>();
+        this.Id = patientId;
+        
     }
 
-    public boolean addEntry(String entry) {
-        return entries.add(entry);
+    public void setValue(String entry) {
+        value += entry;
     }
 
-    public String viewRecords() {
-        String text = "";
-        if (!entries.isEmpty()) {
-            text += ("Medical records for patientId " + patientId + ":");
-            for (String e : entries) {
-                text += (" - " + e + "\n");
-            }
-        }
-        return text;
-
+    public int getId() {
+        return Id;
     }
-
-    public int getPatientId() { return patientId; }
+    
+    public String getValue() {
+        return value;
+    }
+    
 }

@@ -21,44 +21,57 @@ public class EmergencyRoom {
     }
 
     // ثبت بیمار
-    public void registerPatient(Patient p) {
+    public boolean registerPatient(Patient p) {
         patients.add(p);
-        queue.add(p);
-        manageQueue();
+        if(!p.needBed){
+            p.updateStatus(Status.ADMITTED);
+            return true;
+        }
+        else{
+            Bed b = bedsMg.getEmptyBed();
+            if (b != null){
+                b.assignToPatient(p);
+                p.updateStatus(Status.ADMITTED);
+                return true;
+            }
+            else
+                queue.add(p);
+        }
+        return false;
     }
 
     //اختصاص تخت خالی به بیماران در صف
     public void manageQueue() {
         Bed b = bedsMg.getEmptyBed();
         Patient p = queue.peek();
-        if(p.needBed){
+        if (b != null && p != null){
+            b.assignToPatient(p);
             p.updateStatus(Status.ADMITTED);
             queue.poll();
-        }
-        
-        // اگر تخت خالی وجود داشت
-        if  (b != null) {
-            //اگر صف خالی نبود
-            if (p != null){
-                b.assignToPatient(p);
-                p.updateStatus(Status.ADMITTED);
-                queue.poll();
-            }
-        }
+        }        
     }
 
     //ترخیص بیمار
-    // TODO پاک کردن بیمار اگر در صف بود
     public boolean releasePatient(int patientId){
         Patient p = findPatient(patientId);
         if (p == null)
             return false;
-        p.updateStatus(Status.DISCHARGED);
-        bedsMg.releaseBed(p);
-        manageQueue();
+        
+        p = queue.findById(patientId);
+        if(p != null){
+            queue.remove(p);
+            return true;
+        }
+        
+        p = findPatient(patientId);
+        if(p.needBed){
+            bedsMg.releaseBed(bedsMg.findBed(p.getId()).getId());
+            p.updateStatus(Status.DISCHARGED);
+            manageQueue();
+        }
         return true;
-    }
 
+    }
 
     //جست و جوی بیمار بر اساس ایدی
     public Patient findPatient(int patientId) {

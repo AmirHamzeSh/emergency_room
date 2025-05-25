@@ -23,6 +23,7 @@ public class ManagmentFrame extends javax.swing.JFrame {
     public ManagmentFrame(EmergencyRoom room) {
         initComponents();
         this.room= room;
+        lb_CountBed.setText(lb_CountBed.getText()+String.valueOf(room.bedsMg.getBeds().size()));
     }
 
     /**
@@ -46,18 +47,23 @@ public class ManagmentFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableStaffs = new javax.swing.JTable();
+        lb_CountBed = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("مدیرت اوژانس");
 
         lbl_patient.setText("لیست بیماران");
 
+        jTablePatients.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTablePatients.setModel(updateTablePatient());
+        jTablePatients.setEnabled(false);
         jScrollPane1.setViewportView(jTablePatients);
 
         lbl_beds.setText("لیست تخت ها");
 
+        jTable_beds.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTable_beds.setModel(updateTableBeds());
+        jTable_beds.setEnabled(false);
         jScrollPane2.setViewportView(jTable_beds);
 
         jLabel1.setText("لیست انتظار");
@@ -70,6 +76,8 @@ public class ManagmentFrame extends javax.swing.JFrame {
         jTableStaffs.setModel(updateTableStaff());
         jScrollPane4.setViewportView(jTableStaffs);
 
+        lb_CountBed.setText("تعداد تخت :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,19 +87,22 @@ public class ManagmentFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 480, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lbl_patient)
                                 .addGap(14, 14, 14))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_beds, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lb_CountBed)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lbl_beds)))
                                 .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane3)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -107,7 +118,9 @@ public class ManagmentFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lbl_beds)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_beds)
+                    .addComponent(lb_CountBed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -126,17 +139,19 @@ public class ManagmentFrame extends javax.swing.JFrame {
 
     
     public DefaultTableModel updateTablePatient() {
-    String[] columns = {"ID","نام","جنست","سن","شدت"};
+    String[] columns = {"ID","نام","نام خانوادگی","جنست","سن","شدت","وضعیت"};
     DefaultTableModel newModel = new DefaultTableModel(columns, 0);
 
-    // فقط نگاه می‌کنیم بدون حذف بیماران از صف
+    
     for (Patient p : room.patients) {
         newModel.addRow(new Object[]{
             p.getId(),
             p.getName(),
+            p.getFamily(),
             p.getGen(),
             p.getAge(),
-            p.getSeverityLevel().name()
+            p.getSeverityLevel().name(),
+            p.getStatus()
         });
     }
 
@@ -145,15 +160,15 @@ public class ManagmentFrame extends javax.swing.JFrame {
     
     
     public DefaultTableModel updateTableBeds() {
-    String[] columns = {"ID","تخصیص داده"};
+    String[] columns = {"ID","تخصیص داده به بیمار ID"};
     DefaultTableModel newModel = new DefaultTableModel(columns, 0);
 
-    // فقط نگاه می‌کنیم بدون حذف بیماران از صف
+    
     String x = "";
-    for (Bed b : room.bedsMg.beds) {
+    for (Bed b : room.bedsMg.getBeds()) {
         if(b.getAssignedPatient() == null)
             x = "خیر";
-        else {x = String.valueOf(b.assignedPatient.getId());}
+        else {x = String.valueOf(b.getAssignedPatient().getId());}
         newModel.addRow(new Object[]{
             b.getId(),
             x
@@ -210,6 +225,7 @@ public class ManagmentFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTableQueu;
     private javax.swing.JTable jTableStaffs;
     private javax.swing.JTable jTable_beds;
+    private javax.swing.JLabel lb_CountBed;
     private javax.swing.JLabel lbl_beds;
     private javax.swing.JLabel lbl_patient;
     // End of variables declaration//GEN-END:variables

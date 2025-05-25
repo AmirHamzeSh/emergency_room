@@ -32,10 +32,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         btn_register_patient = new javax.swing.JButton();
         btn_managment = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btMRecord = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnRegisterStaff = new javax.swing.JButton();
+        btBedAdd = new javax.swing.JButton();
+        btnRealesePatient = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("مدیریت اورژانس");
@@ -55,9 +56,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("ثبت تریاژ");
-
-        jButton4.setText("ثبت پرونده پزشکی");
+        btMRecord.setText("ثبت یا ویرایش پرونده پزشکی");
+        btMRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMRecordActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("بخش اورژانس");
 
@@ -68,6 +72,20 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btBedAdd.setText("افزایش تخت");
+        btBedAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBedAddActionPerformed(evt);
+            }
+        });
+
+        btnRealesePatient.setText("ترخیص بیمار");
+        btnRealesePatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealesePatientActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,36 +93,44 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_register_patient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_managment, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegisterStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(86, 86, 86))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btMRecord)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegisterStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnRealesePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btBedAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btn_register_patient, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btn_managment, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(167, 167, 167)
+                        .addComponent(jLabel1)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_managment)
                     .addComponent(btn_register_patient))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRealesePatient)
+                    .addComponent(btBedAdd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegisterStaff)
-                .addGap(97, 97, 97))
+                    .addComponent(btMRecord)
+                    .addComponent(btnRegisterStaff))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,6 +153,23 @@ public class MainFrame extends javax.swing.JFrame {
         RegisterStaffFrame frame = new RegisterStaffFrame(room);
         frame.setVisible(true);
     }//GEN-LAST:event_btnRegisterStaffActionPerformed
+
+    private void btBedAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBedAddActionPerformed
+        // TODO add your handling code here:
+        AddBedFrame frame = new AddBedFrame(room);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btBedAddActionPerformed
+
+    private void btnRealesePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealesePatientActionPerformed
+        // TODO add your handling code here:
+        releasePatientFrame frame = new releasePatientFrame(room);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btnRealesePatientActionPerformed
+
+    private void btMRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMRecordActionPerformed
+        MedicalRecordFrame frame = new MedicalRecordFrame(room);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btMRecordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,11 +201,12 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btBedAdd;
+    private javax.swing.JButton btMRecord;
+    private javax.swing.JButton btnRealesePatient;
     private javax.swing.JButton btnRegisterStaff;
     private javax.swing.JButton btn_managment;
     private javax.swing.JButton btn_register_patient;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

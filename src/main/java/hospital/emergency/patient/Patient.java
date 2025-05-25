@@ -1,48 +1,44 @@
 package hospital.emergency.patient;
 
 //بیمار
+
 public class Patient {
-    private int id;
-    private String name;
-    private String gen;
-    private int age;
+    private final int id;
+    private static int idCounter = 100;
+    private final String name;
+    private final String family;
+    private final String gen;
+    private final int age;
     private SeverityLevel severityLevel = SeverityLevel.NULL;
     private Status status;
-    private MedicalRecord mRecord;
     public boolean needBed = false;
-
-    public Patient(int id, String name, int age,String gen , boolean needBed) {
-        this.id = id;
+    private final  MedicalRecord medicalRecord ;
+    
+    public Patient(String name, String family ,int age,String gen ,SeverityLevel severityLevel, boolean needBed) {
+        this.id = idCounter; idCounter++;
         this.name = name;
+        this.family = family;
         this.gen = gen;
         this.age = age;
+        this.severityLevel = severityLevel;
         this.status = Status.REGISTERED;
-        this.mRecord = new MedicalRecord(id);
         this.needBed = needBed;
+        this.medicalRecord = new MedicalRecord(id);
     }
 
-    public String getinfo() {
-        String text = "";
-        text += ("patient: " + name + ", age: " + age + ", severity: " + severityLevel + "\n");
-        text += mRecord.viewRecords();
-        return text;
-    }
-
-    public void updateStatus(Status newStatus) {
-        System.out.println("Updating status of " + name + " from " + status + " to " + newStatus);
+    public boolean updateStatus(Status newStatus) {
         this.status = newStatus;
-        System.out.println("status updated.");
-
+        return true;
     }
 
     // Getters
     public int getId() { return id; }
     public String getName() { return name; }
+    public String getFamily() {return family;}
     public int getAge() { return age; }
     public String getGen() { return gen; }
     public SeverityLevel getSeverityLevel() { return severityLevel; }
     public Status getStatus() { return status; }
-    public MedicalRecord getMedicalRecord() { return mRecord; }
     public String[] Exportdata(){
         String[] data = {
             String.valueOf(this.id),
@@ -54,4 +50,9 @@ public class Patient {
         };
         return data;
     }
+
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
+    
 }

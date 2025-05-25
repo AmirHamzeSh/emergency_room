@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PatientsQueue {
-    private LinkedList<Patient> queueCritical;
-    private LinkedList<Patient> queueHigh;
-    private LinkedList<Patient> queueMedium;
-    private LinkedList<Patient> queueLow;
+    final private LinkedList<Patient> queueCritical;
+    final private LinkedList<Patient> queueHigh;
+    final private LinkedList<Patient> queueMedium;
+    final private LinkedList<Patient> queueLow;
 
     public PatientsQueue() {
         queueCritical = new LinkedList<>();
@@ -79,4 +79,38 @@ public class PatientsQueue {
         allPatients.addAll(queueLow);
         return allPatients;
     }
+    
+    public boolean remove(Patient p) {
+        switch (p.getSeverityLevel()) {
+            case CRITICAL:
+                return queueCritical.remove(p);
+            case HIGH:
+                return queueHigh.remove(p);
+            case MEDIUM:
+                return queueMedium.remove(p);
+            case LOW:
+            case NULL:
+                return queueLow.remove(p);
+            default:
+                return false;
+        }
+    }
+    
+    public Patient findById(int id) {
+        for (Patient p : queueCritical) {
+            if (p.getId() == id) return p;
+        }
+        for (Patient p : queueHigh) {
+            if (p.getId() == id) return p;
+        }
+        for (Patient p : queueMedium) {
+            if (p.getId() == id) return p;
+        }
+        for (Patient p : queueLow) {
+            if (p.getId() == id) return p;
+        }
+        return null;
+    }
+
+
 }

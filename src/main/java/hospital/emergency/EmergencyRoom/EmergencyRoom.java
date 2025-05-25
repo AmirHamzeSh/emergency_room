@@ -7,10 +7,10 @@ import hospital.emergency.staff.*;
 import java.util.ArrayList;
 //شبیه سازی محیط اورژانس
 public class EmergencyRoom {
-    public BedsManage bedsMg; // مدیریت تخت ها
-    public PatientsQueue queue; //   لیست بیماران در صف
-    public List<Staff> staffs; //            لیست پرسنل
-    public List<Patient> patients; //  لیست همه بیماران
+    public static BedsManage bedsMg; // مدیریت تخت ها
+    public static PatientsQueue queue; //   لیست بیماران در صف
+    public static List<Staff> staffs; //            لیست پرسنل
+    public static List<Patient> patients; //  لیست همه بیماران
 
     public EmergencyRoom(int bedsCount) {
         bedsMg = new BedsManage(bedsCount);
@@ -30,11 +30,14 @@ public class EmergencyRoom {
     //اختصاص تخت خالی به بیماران در صف
     public void manageQueue() {
         Bed b = bedsMg.getEmptyBed();
+        Patient p = queue.peek();
+        if(p.needBed){
+            p.updateStatus(Status.ADMITTED);
+            queue.poll();
+        }
         
         // اگر تخت خالی وجود داشت
         if  (b != null) {
-            Patient p = queue.peek();
-            
             //اگر صف خالی نبود
             if (p != null){
                 b.assignToPatient(p);

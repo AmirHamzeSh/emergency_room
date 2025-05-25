@@ -2,13 +2,20 @@ package hospital.emergency.EmergencyRoom;
 
 import hospital.emergency.patient.Patient;
 import java.util.LinkedList;
+import java.util.List;
 
-// ایجاد صف بیماران بر اساس الویت
 public class PatientsQueue {
     private LinkedList<Patient> queueCritical;
     private LinkedList<Patient> queueHigh;
-    private LinkedList<Patient> queueMEDIUM;
+    private LinkedList<Patient> queueMedium;
     private LinkedList<Patient> queueLow;
+
+    public PatientsQueue() {
+        queueCritical = new LinkedList<>();
+        queueHigh = new LinkedList<>();
+        queueMedium = new LinkedList<>();
+        queueLow = new LinkedList<>();
+    }
 
     public void add(Patient p) {
         switch (p.getSeverityLevel()) {
@@ -19,11 +26,14 @@ public class PatientsQueue {
                 queueHigh.add(p);
                 break;
             case MEDIUM:
-                queueMEDIUM.add(p);
+                queueMedium.add(p);
                 break;
             case LOW:
                 queueLow.add(p);
                 break;
+            case NULL:
+                queueLow.add(p);
+                break;                
         }
     }
 
@@ -32,10 +42,12 @@ public class PatientsQueue {
             return queueCritical.peek();
         } else if (!queueHigh.isEmpty()) {
             return queueHigh.peek();
-        } else if (!queueMEDIUM.isEmpty()) {
-            return queueMEDIUM.peek();
-        } else {
+        } else if (!queueMedium.isEmpty()) {
+            return queueMedium.peek();
+        } else if (!queueLow.isEmpty()) {
             return queueLow.peek();
+        } else {
+            return null;
         }
     }
 
@@ -44,11 +56,27 @@ public class PatientsQueue {
             return queueCritical.poll();
         } else if (!queueHigh.isEmpty()) {
             return queueHigh.poll();
-        } else if (!queueMEDIUM.isEmpty()) {
-            return queueMEDIUM.poll();
-        } else {
+        } else if (!queueMedium.isEmpty()) {
+            return queueMedium.poll();
+        } else if (!queueLow.isEmpty()) {
             return queueLow.poll();
+        } else {
+            return null;
         }
     }
+
+    public boolean isEmpty() {
+        return queueCritical.isEmpty() && queueHigh.isEmpty() &&
+               queueMedium.isEmpty() && queueLow.isEmpty();
+    }
     
+    
+    public List<Patient> getall(){
+        List<Patient> allPatients = new LinkedList<>();
+        allPatients.addAll(queueCritical);
+        allPatients.addAll(queueHigh);
+        allPatients.addAll(queueMedium);
+        allPatients.addAll(queueLow);
+        return allPatients;
+    }
 }

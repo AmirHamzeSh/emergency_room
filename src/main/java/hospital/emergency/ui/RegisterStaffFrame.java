@@ -38,9 +38,9 @@ public class RegisterStaffFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btn_register = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        tf_family = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         tf_name = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tf_ID = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cb_role = new javax.swing.JComboBox<>();
@@ -52,7 +52,7 @@ public class RegisterStaffFrame extends javax.swing.JFrame {
 
         jLabel1.setText("مشخصات کارمند");
 
-        jLabel2.setText("نام خانوادگی:");
+        jLabel2.setText("نام :");
 
         btn_register.setText("ثبت");
         btn_register.addActionListener(new java.awt.event.ActionListener() {
@@ -68,7 +68,7 @@ public class RegisterStaffFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("نام");
+        jLabel3.setText("ID");
 
         jLabel4.setText("نقش");
 
@@ -85,33 +85,32 @@ public class RegisterStaffFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                        .addComponent(tf_family)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_register)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tf_name)
+                        .addComponent(tf_ID)
                         .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cb_shift, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cb_role, 0, 319, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(9, 9, 9))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tf_name)
+                            .addComponent(cb_shift, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cb_role, 0, 315, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addGap(9, 9, 9)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -121,11 +120,11 @@ public class RegisterStaffFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_family, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -150,7 +149,7 @@ public class RegisterStaffFrame extends javax.swing.JFrame {
 
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
         // TODO add your handling code here:
-            if(tf_name.getText().isEmpty() || tf_family.getText().isEmpty()) {
+            if(tf_ID.getText().isEmpty() || tf_name.getText().isEmpty()) {
         JOptionPane.showMessageDialog(
             this,
             "همه موارد را کامل کنید.",
@@ -159,8 +158,8 @@ public class RegisterStaffFrame extends javax.swing.JFrame {
         );
     } else {
         try{
-            int id = Integer.parseInt(tf_name.getText().trim());
-            String name = tf_family.getText().trim();
+            int id = Integer.parseInt(tf_ID.getText().trim());
+            String name = tf_name.getText().trim();
             Shift staffShift = null;
 
             String selectedShift = (String) cb_shift.getSelectedItem();
@@ -184,18 +183,17 @@ public class RegisterStaffFrame extends javax.swing.JFrame {
             );
 
             // اگر میخوای فرم رو بعد ثبت پاک کنی:
+            tf_ID.setText("");
             tf_name.setText("");
-            tf_family.setText("");
             cb_role.setSelectedIndex(0);
-        } catch (NumberFormatException e) {
+        }catch(Exception e){
             JOptionPane.showMessageDialog(
-                this,
-                "لطفا مقادیر را درست وارد کنید.",
-                "خطا",
-                JOptionPane.ERROR_MESSAGE
-            );
+            this,
+            "مقادیر را درست وارد کنید",
+            "خطا",
+            JOptionPane.ERROR_MESSAGE
+        );
         }
-  
     }
     }//GEN-LAST:event_btn_registerActionPerformed
 
@@ -209,7 +207,7 @@ public class RegisterStaffFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField tf_family;
+    private javax.swing.JTextField tf_ID;
     private javax.swing.JTextField tf_name;
     // End of variables declaration//GEN-END:variables
 }
